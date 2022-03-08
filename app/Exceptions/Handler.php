@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Http\Resources\BaseResource;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
+use Request;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -34,8 +39,33 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function prepareJsonResponse($request, Throwable $e)
+    {
+        $response = BaseResource::make([])
+            ->error(config('app.debug') ?
+                $e->getMessage()
+                : ($this->isHttpException($e) ?
+                    $e->getMessage()
+                    : 'Server Error')
+            );
+
+        if(config('app.debug')){
+            $response->trace(collect($e->getTrace())->map(function ($trace) {
+                return Arr::except($trace, ['args']);
+            })->all());
+        }
+
+        if ($e instanceof ValidationException) {
+            $response->errors($e->errors());
+        }
+        return $response->response()
+            ->setStatusCode($e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500)
+            ->withHeaders($e instanceof HttpExceptionInterface ? $e->getHeaders() : []);
     }
 }
