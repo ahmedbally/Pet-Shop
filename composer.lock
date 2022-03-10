@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3a2a7a0061396133c7d3acabfd3e457",
+    "content-hash": "3258aed6dbee0fd8dfbe1b40dad6a24a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -689,6 +689,151 @@
             "time": "2021-11-21T21:41:47+00:00"
         },
         {
+            "name": "graham-campbell/security",
+            "version": "v9.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Laravel-Security.git",
+                "reference": "2206db3f70bb8312b9321033f4686a24125df41d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Security/zipball/2206db3f70bb8312b9321033f4686a24125df41d",
+                "reference": "2206db3f70bb8312b9321033f4686a24125df41d",
+                "shasum": ""
+            },
+            "require": {
+                "graham-campbell/security-core": "^3.2.4",
+                "illuminate/contracts": "^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "require-dev": {
+                "graham-campbell/analyzer": "^3.0",
+                "graham-campbell/testbench": "^5.7",
+                "phpunit/phpunit": "^8.5.8 || ^9.3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GrahamCampbell\\Security\\SecurityServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GrahamCampbell\\Security\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                }
+            ],
+            "description": "Security Is An Anti-XSS Wrapper For Laravel",
+            "keywords": [
+                "Graham Campbell",
+                "GrahamCampbell",
+                "Laravel Security",
+                "Laravel-Security",
+                "anti-xss",
+                "framework",
+                "laravel",
+                "security",
+                "xss"
+            ],
+            "support": {
+                "issues": "https://github.com/GrahamCampbell/Laravel-Security/issues",
+                "source": "https://github.com/GrahamCampbell/Laravel-Security/tree/v9.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/graham-campbell/security",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-01-24T02:11:12+00:00"
+        },
+        {
+            "name": "graham-campbell/security-core",
+            "version": "v3.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Security-Core.git",
+                "reference": "f5a98c9b4eb079f76c7dcc64d035c3a310cc9e5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Security-Core/zipball/f5a98c9b4eb079f76c7dcc64d035c3a310cc9e5f",
+                "reference": "f5a98c9b4eb079f76c7dcc64d035c3a310cc9e5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5 || ^8.0",
+                "voku/anti-xss": "~4.1.33",
+                "voku/portable-utf8": "^5.4.51 || ^6.0"
+            },
+            "require-dev": {
+                "graham-campbell/analyzer": "^3.0",
+                "phpunit/phpunit": "^8.5.8 || ^9.3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GrahamCampbell\\SecurityCore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                }
+            ],
+            "description": "Security Core Is A Wrapper Of voku/anti-xss For General Use",
+            "keywords": [
+                "Graham Campbell",
+                "GrahamCampbell",
+                "Security Core",
+                "Security-Core",
+                "anti-xss",
+                "framework",
+                "laravel",
+                "security",
+                "xss"
+            ],
+            "support": {
+                "issues": "https://github.com/GrahamCampbell/Security-Core/issues",
+                "source": "https://github.com/GrahamCampbell/Security-Core/tree/v3.2.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/graham-campbell/security-core",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-02-07T10:47:24+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "7.4.1",
             "source": {
@@ -1013,16 +1158,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.83.3",
+            "version": "v8.83.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b4ed222a188cca74ca9062296e525d26ae54a0ce"
+                "reference": "97a549f1a83cfb32dab1eecab4c4d40a984a72b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b4ed222a188cca74ca9062296e525d26ae54a0ce",
-                "reference": "b4ed222a188cca74ca9062296e525d26ae54a0ce",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/97a549f1a83cfb32dab1eecab4c4d40a984a72b5",
+                "reference": "97a549f1a83cfb32dab1eecab4c4d40a984a72b5",
                 "shasum": ""
             },
             "require": {
@@ -1182,7 +1327,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-03-03T15:14:29+00:00"
+            "time": "2022-03-08T16:12:54+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -5657,6 +5802,89 @@
             "time": "2021-12-12T23:22:04+00:00"
         },
         {
+            "name": "voku/anti-xss",
+            "version": "4.1.35",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voku/anti-xss.git",
+                "reference": "4d7ec2816cd6eeebb7d5abbde8b0349f66709496"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voku/anti-xss/zipball/4d7ec2816cd6eeebb7d5abbde8b0349f66709496",
+                "reference": "4d7ec2816cd6eeebb7d5abbde8b0349f66709496",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "voku/portable-utf8": "~6.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0 || ~7.0 || ~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "voku\\helper\\": "src/voku/helper/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "EllisLab Dev Team",
+                    "homepage": "http://ellislab.com/"
+                },
+                {
+                    "name": "Lars Moelleken",
+                    "email": "lars@moelleken.org",
+                    "homepage": "https://www.moelleken.org/"
+                }
+            ],
+            "description": "anti xss-library",
+            "homepage": "https://github.com/voku/anti-xss",
+            "keywords": [
+                "anti-xss",
+                "clean",
+                "security",
+                "xss"
+            ],
+            "support": {
+                "issues": "https://github.com/voku/anti-xss/issues",
+                "source": "https://github.com/voku/anti-xss/tree/4.1.35"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/moelleken",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/voku",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/anti-xss",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/voku",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/voku/anti-xss",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-12-08T15:20:33+00:00"
+        },
+        {
             "name": "voku/portable-ascii",
             "version": "1.6.1",
             "source": {
@@ -5729,6 +5957,105 @@
                 }
             ],
             "time": "2022-01-24T18:55:24+00:00"
+        },
+        {
+            "name": "voku/portable-utf8",
+            "version": "6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/voku/portable-utf8.git",
+                "reference": "e4365df3f7b63f9e57e1015f6c3ceec19c169f7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/voku/portable-utf8/zipball/e4365df3f7b63f9e57e1015f6c3ceec19c169f7a",
+                "reference": "e4365df3f7b63f9e57e1015f6c3ceec19c169f7a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "symfony/polyfill-iconv": "~1.0",
+                "symfony/polyfill-intl-grapheme": "~1.0",
+                "symfony/polyfill-intl-normalizer": "~1.0",
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php72": "~1.0",
+                "voku/portable-ascii": "~1.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0 || ~7.0 || ~9.0"
+            },
+            "suggest": {
+                "ext-ctype": "Use Ctype for e.g. hexadecimal digit detection",
+                "ext-fileinfo": "Use Fileinfo for better binary file detection",
+                "ext-iconv": "Use iconv for best performance",
+                "ext-intl": "Use Intl for best performance",
+                "ext-json": "Use JSON for string detection",
+                "ext-mbstring": "Use Mbstring for best performance"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "voku\\": "src/voku/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(Apache-2.0 or GPL-2.0)"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Hamid Sarfraz",
+                    "homepage": "http://pageconfig.com/"
+                },
+                {
+                    "name": "Lars Moelleken",
+                    "homepage": "http://www.moelleken.org/"
+                }
+            ],
+            "description": "Portable UTF-8 library - performance optimized (unicode) string functions for php.",
+            "homepage": "https://github.com/voku/portable-utf8",
+            "keywords": [
+                "UTF",
+                "clean",
+                "php",
+                "unicode",
+                "utf-8",
+                "utf8"
+            ],
+            "support": {
+                "issues": "https://github.com/voku/portable-utf8/issues",
+                "source": "https://github.com/voku/portable-utf8/tree/6.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/moelleken",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/voku",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/portable-utf8",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/voku",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/voku/portable-utf8",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-01-24T09:49:08+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -7349,16 +7676,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.13.5",
+            "version": "v1.13.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "aeb6eeb55b22c328d2f301145b97288127691d48"
+                "reference": "6205041336b09b965af1d6af29261584e787bf52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/aeb6eeb55b22c328d2f301145b97288127691d48",
-                "reference": "aeb6eeb55b22c328d2f301145b97288127691d48",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/6205041336b09b965af1d6af29261584e787bf52",
+                "reference": "6205041336b09b965af1d6af29261584e787bf52",
                 "shasum": ""
             },
             "require": {
@@ -7405,7 +7732,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-02-17T19:59:03+00:00"
+            "time": "2022-03-07T15:35:47+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8445,16 +8772,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.17",
+            "version": "9.5.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5c5abcfaa2cbd44b2203995d7a339ef910fe0c8f"
+                "reference": "1b5856028273bfd855e60a887278857d872ec67a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5c5abcfaa2cbd44b2203995d7a339ef910fe0c8f",
-                "reference": "5c5abcfaa2cbd44b2203995d7a339ef910fe0c8f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1b5856028273bfd855e60a887278857d872ec67a",
+                "reference": "1b5856028273bfd855e60a887278857d872ec67a",
                 "shasum": ""
             },
             "require": {
@@ -8532,7 +8859,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.17"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.18"
             },
             "funding": [
                 {
@@ -8544,7 +8871,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-05T16:54:31+00:00"
+            "time": "2022-03-08T06:52:28+00:00"
         },
         {
             "name": "psr/cache",
@@ -9866,7 +10193,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.3|^8.0",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"

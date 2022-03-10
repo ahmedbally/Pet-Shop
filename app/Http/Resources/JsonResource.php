@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\JsonResource as BaseResource;
 
-class BaseResource extends JsonResource
+class JsonResource extends BaseResource
 {
 
     private $success = 1;

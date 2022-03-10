@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BaseResource;
+use App\Http\Resources\JsonResource;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Password as PasswordBroker;
@@ -36,7 +36,7 @@ class ForgotPasswordController extends Controller
         });
 
         if ($status === PasswordBroker::RESET_LINK_SENT){
-            return BaseResource::make([
+            return JsonResource::make([
                 'reset_token' => $newToken
             ])->success()->response();
         }

@@ -20,3 +20,5 @@ Route::prefix('user')->group(function (){
     Route::post('forgot-password', \App\Http\Controllers\Auth\ForgotPasswordController::class);
     Route::post('reset-password-token', \App\Http\Controllers\Auth\ResetPasswordController::class);
 });
+
+Route::post('file/upload', [\App\Http\Controllers\FileController::class , 'store']);

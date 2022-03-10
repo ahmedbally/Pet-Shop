@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BaseResource;
+use App\Http\Requests\LoginRequest;
+use App\Http\Resources\JsonResource;
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
@@ -35,7 +36,6 @@ class LoginController extends Controller
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::class),
             ],
             'password' => [
                 'required',
@@ -43,10 +43,11 @@ class LoginController extends Controller
                 'max:255',
             ]
         ]);
+
         if (! $token = Auth::attempt($credentials)) {
-            throw new UnauthorizedException;
+            throw new UnauthorizedException('test');
         }
         event(new Login('api',Auth::user(),false));
-        return BaseResource::make(['token' => $token])->success()->response();
+        return JsonResource::make(['token' => $token])->success()->response();
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BaseResource;
+use App\Http\Resources\JsonResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
@@ -39,7 +39,7 @@ class ResetPasswordController extends Controller
         });
 
         if ($status === PasswordBroker::PASSWORD_RESET) {
-            return BaseResource::make([
+            return JsonResource::make([
                 'message' => 'Password has been successfully updated'
                 ])->success()->response();
         }

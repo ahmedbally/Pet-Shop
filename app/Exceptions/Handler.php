@@ -2,7 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Http\Resources\BaseResource;
+use App\Http\Resources\JsonResource;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
@@ -47,7 +48,7 @@ class Handler extends ExceptionHandler
 
     protected function prepareJsonResponse($request, Throwable $e)
     {
-        $response = BaseResource::make([])
+        $response = JsonResource::make([])
             ->error(config('app.debug') ?
                 $e->getMessage()
                 : ($this->isHttpException($e) ?
@@ -67,5 +68,32 @@ class Handler extends ExceptionHandler
         return $response->response()
             ->setStatusCode($e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500)
             ->withHeaders($e instanceof HttpExceptionInterface ? $e->getHeaders() : []);
+    }
+
+    /**
+     * Convert an authentication exception into a response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+
+        return $this->shouldReturnJson($request, $exception)
+            ? JsonResource::make([])->error($exception->getMessage())->response()->setStatusCode(401)
+            : redirect()->guest($exception->redirectTo() ?? route('login'));
+    }
+
+    /**
+     * Convert a validation exception into a JSON response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return $this->prepareJsonResponse($request, $exception);
     }
 }

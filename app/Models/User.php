@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Uuidable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,7 +53,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Uuidable;
 
     /**
      * The attributes that are mass assignable.
@@ -60,9 +61,16 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'is_admin',
         'email',
         'password',
+        'avatar',
+        'address',
+        'phone_number',
+        'is_marketing',
+        'last_login_at',
     ];
 
     /**
@@ -71,8 +79,10 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $hidden = [
+        'is_admin',
         'password',
         'remember_token',
+        'last_login_at',
     ];
 
     /**
@@ -82,6 +92,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_login_at' => 'datetime',
     ];
 
     /**
@@ -91,7 +102,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTIdentifier()
     {
-        return $this->uuid;
+        return $this->getKey();
     }
 
     public function getJWTCustomClaims()
