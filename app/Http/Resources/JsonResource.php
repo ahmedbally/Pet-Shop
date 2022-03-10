@@ -9,6 +9,10 @@ class JsonResource extends BaseResource
 
     private $success = 1;
 
+    private $status = null;
+
+    private $headers = [];
+
     private $error = null;
 
     private $errors = [];
@@ -47,24 +51,41 @@ class JsonResource extends BaseResource
         return $this;
     }
 
-    public function error($error = '')
+    public function error(string $error = '')
     {
         $this->success = 0;
+        $this->status = 500;
         $this->error = $error;
         return $this;
     }
 
-    public function errors($errors = [])
+    public function errors(array $errors = [])
     {
         $this->errors = $errors;
         return $this;
     }
 
-    public function trace($trace = [])
+    public function trace(array $trace = [])
     {
         $this->trace = $trace;
         return $this;
     }
 
+    public function status(int $value)
+    {
+        $this->status = $value;
+        return $this;
+    }
 
+    public function headers(array $headers)
+    {
+        $this->headers = $headers;
+        return $this;
+    }
+
+    public function withResponse($request, $response)
+    {
+        $response->setStatusCode($this->status ?? $response->getStatusCode())
+            ->withHeaders($this->headers);
+    }
 }

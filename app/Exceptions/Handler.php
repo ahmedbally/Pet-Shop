@@ -62,12 +62,16 @@ class Handler extends ExceptionHandler
             })->all());
         }
 
+        if ($e instanceof HttpExceptionInterface) {
+            $response->status($e->getStatusCode());
+            $response->headers($e->getHeaders());
+        }
+
         if ($e instanceof ValidationException) {
+            $response->status($e->status);
             $response->errors($e->errors());
         }
-        return $response->response()
-            ->setStatusCode($e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500)
-            ->withHeaders($e instanceof HttpExceptionInterface ? $e->getHeaders() : []);
+        return $response->response();
     }
 
     /**
