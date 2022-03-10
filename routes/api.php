@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('user')->name('auth.')->group(function (){
+Route::prefix('user')->name('user.')->group(function (){
     Route::post('login', \App\Http\Controllers\Api\V1\Auth\LoginController::class)->name('login');
     Route::get('logout', \App\Http\Controllers\Api\V1\Auth\LogoutController::class)->name('logout');
     Route::post('forgot-password', \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController::class)->name('forgot-password');

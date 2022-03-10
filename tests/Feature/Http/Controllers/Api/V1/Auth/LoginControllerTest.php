@@ -32,7 +32,7 @@ class LoginControllerTest extends TestCase
     {
         Event::fake();
 
-        $this->postJson(route('auth.login'), [
+        $this->postJson(route('user.login'), [
             'email' => $this->user->email,
             'password' => '12345678'
         ])->assertStatus(200)
@@ -43,19 +43,19 @@ class LoginControllerTest extends TestCase
 
     public function test_login_validation(): void
     {
-        $this->postJson(route('auth.login'), [
+        $this->postJson(route('user.login'), [
             'email' => 'test@test.com',
             'password' => '12345678'
-        ])->assertStatus(403)
+        ])->assertStatus(422)
             ->assertJsonPath('error','Failed to authenticate user');
 
-        $this->postJson(route('auth.login'), [
+        $this->postJson(route('user.login'), [
             'email' => 'test',
             'password' => '12345678'
         ])->assertStatus(422)
             ->assertJsonValidationErrorFor('email');
 
-        $this->postJson(route('auth.login'), [
+        $this->postJson(route('user.login'), [
             'email' => 'test@test.com',
             'password' => null
         ])->assertStatus(422)

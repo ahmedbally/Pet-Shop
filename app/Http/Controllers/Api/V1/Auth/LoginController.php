@@ -8,6 +8,7 @@ use App\Http\Resources\JsonResource;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class LoginController extends Controller
 {
@@ -43,7 +44,7 @@ class LoginController extends Controller
         ]);
 
         if (! $token = Auth::attempt($credentials)) {
-            throw new AuthorizationException('Failed to authenticate user');
+            throw new UnprocessableEntityHttpException('Failed to authenticate user');
         }
         event(new Login(Auth::user()));
         return JsonResource::make(['token' => $token])->success()->response();
