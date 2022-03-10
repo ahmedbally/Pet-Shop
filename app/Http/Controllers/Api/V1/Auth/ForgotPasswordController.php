@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\JsonResource;
-use Faker\Provider\Base;
 use Illuminate\Http\Request;
-use \Illuminate\Support\Facades\Password as PasswordBroker;
+use Illuminate\Support\Facades\Password as PasswordBroker;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ForgotPasswordController extends Controller

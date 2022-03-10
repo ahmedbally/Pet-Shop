@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('user')->name('user.')->group(function (){
-    Route::post('login', \App\Http\Controllers\Auth\LoginController::class);
-    Route::get('logout', \App\Http\Controllers\Auth\LogoutController::class);
-    Route::post('forgot-password', \App\Http\Controllers\Auth\ForgotPasswordController::class);
-    Route::post('reset-password-token', \App\Http\Controllers\Auth\ResetPasswordController::class);
+Route::prefix('user')->name('auth.')->group(function (){
+    Route::post('login', \App\Http\Controllers\Api\V1\Auth\LoginController::class)->name('login');
+    Route::get('logout', \App\Http\Controllers\Api\V1\Auth\LogoutController::class)->name('logout');
+    Route::post('forgot-password', \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController::class)->name('forgot-password');
+    Route::post('reset-password-token', \App\Http\Controllers\Api\V1\Auth\ResetPasswordController::class)->name('reset-password');
 });
 
 Route::prefix('file')->name('file.')->group(function (){
-    Route::post('file/upload', [\App\Http\Controllers\FileController::class , 'store'])->name('upload');
-    Route::get('{file}', [\App\Http\Controllers\FileController::class , 'show'])->name('show');
+    Route::post('file/upload', [\App\Http\Controllers\Api\V1\FileController::class , 'store'])->name('upload');
+    Route::get('{file}', [\App\Http\Controllers\Api\V1\FileController::class , 'show'])->name('show');
 });

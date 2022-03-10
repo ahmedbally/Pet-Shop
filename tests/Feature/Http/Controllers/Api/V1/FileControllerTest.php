@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Tests\Feature\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\FileController;
 use App\Http\Middleware\Authenticate;
 use App\Models\File;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -13,16 +12,11 @@ use Tests\TestCase;
 /**
  * Class FileControllerTest.
  *
- * @covers \App\Http\Controllers\FileController
+ * @covers \App\Http\Controllers\Api\V1\FileController
  */
 class FileControllerTest extends TestCase
 {
     use DatabaseTransactions;
-
-    /**
-     * @var FileController
-     */
-    protected $fileController;
 
     /**
      * {@inheritdoc}
@@ -31,18 +25,6 @@ class FileControllerTest extends TestCase
     {
         parent::setUp();
         $this->withoutMiddleware(Authenticate::class);
-        $this->fileController = new FileController();
-        $this->app->instance(FileController::class, $this->fileController);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->fileController);
     }
 
     public function test_store(): void
@@ -51,7 +33,7 @@ class FileControllerTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.png');
 
         $response = $this->postJson(route('file.upload'), [
-            'file'=>$file
+            'file' => $file
         ]);
 
         Storage::assertExists('pet-shop/'.$file->hashName());
@@ -68,14 +50,16 @@ class FileControllerTest extends TestCase
         ]);
 
         Storage::assertMissing('pet-shop/'.$file->hashName());
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors('file');
 
         $response = $this->postJson(route('file.upload'), [
             'file'=>$file
         ]);
 
         Storage::assertMissing('pet-shop/'.$file->hashName());
-        $response->assertStatus(422);
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors('file');
     }
 
     public function test_show(): void

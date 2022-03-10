@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\V1\Auth;
 
+use App\Events\Login;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
 use App\Http\Resources\JsonResource;
-use App\Models\User;
-use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\UnauthorizedException;
 
 class LoginController extends Controller
 {
@@ -27,6 +24,7 @@ class LoginController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function __invoke(Request $request)
     {
@@ -45,9 +43,9 @@ class LoginController extends Controller
         ]);
 
         if (! $token = Auth::attempt($credentials)) {
-            throw new UnauthorizedException('test');
+            throw new AuthorizationException('Failed to authenticate user');
         }
-        event(new Login('api',Auth::user(),false));
+        event(new Login(Auth::user()));
         return JsonResource::make(['token' => $token])->success()->response();
     }
 }

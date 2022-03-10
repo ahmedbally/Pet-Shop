@@ -16,6 +16,9 @@ class XSSFilterMiddleware extends TransformsRequest
      */
     protected function transform($key, $value)
     {
-        return app('security')->clean($value);
+        if (is_string($value)) {
+            return app('security')->clean($value);
+        }
+        return $value;
     }
 }
