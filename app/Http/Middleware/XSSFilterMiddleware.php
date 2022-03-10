@@ -2,9 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
+use GrahamCampbell\Security\Facades\Security;
 use Illuminate\Foundation\Http\Middleware\TransformsRequest;
-use Illuminate\Http\Request;
 
 class XSSFilterMiddleware extends TransformsRequest
 {
@@ -17,6 +16,6 @@ class XSSFilterMiddleware extends TransformsRequest
      */
     protected function transform($key, $value)
     {
-        return clean($value);
+        return app('security')->clean($value);
     }
 }
