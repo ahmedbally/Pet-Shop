@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Storage;
 
 class FileResource extends JsonResource
 {
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+        $this->success();
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -22,10 +28,5 @@ class FileResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->update_at,
         ];
-    }
-
-    public function success()
-    {
-        return true;
     }
 }

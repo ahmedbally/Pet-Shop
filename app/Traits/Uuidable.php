@@ -16,7 +16,7 @@ trait Uuidable
     protected static function bootUuidable()
     {
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = Str::orderedUuid();
+            $model->{$model->getKeyName()} = Str::orderedUuid()->toString();
         });
     }
 

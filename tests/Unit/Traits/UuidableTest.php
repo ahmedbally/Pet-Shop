@@ -44,12 +44,12 @@ class UuidableTest extends TestCase
         $this->assertFalse($this->uuidable->getIncrementing());
     }
 
-    public function testGetKeyName(): void
+    public function test_get_key_name(): void
     {
         $this->assertEquals($this->uuidable->uuidColumn, $this->uuidable->getKeyName());
     }
 
-    public function testGetKeyType(): void
+    public function test_get_key_type(): void
     {
         $this->assertEquals('string', $this->uuidable->getKeyType());
     }
