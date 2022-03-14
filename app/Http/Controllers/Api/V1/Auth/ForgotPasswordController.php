@@ -28,7 +28,7 @@ class ForgotPasswordController extends Controller
     {
         $newToken = null;
 
-        $credentials = $request->validate(['email' => ['required','email']]);
+        $credentials = $request->validate(['email' => ['required']]);
 
         $status = PasswordBroker::sendResetLink($credentials, function ($user, $token) use (&$newToken){
             $newToken = $token;
