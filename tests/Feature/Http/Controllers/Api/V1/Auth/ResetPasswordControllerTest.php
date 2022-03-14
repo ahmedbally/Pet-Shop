@@ -24,7 +24,7 @@ class ResetPasswordControllerTest extends TestCase
             ]);
 
         $newPassword = Str::random(18);
-        $this->postJson(route('user.reset-password'),[
+        $this->postJson(route('user.reset-password'), [
             'email' => $user->email,
             'token' => $response->json('data.reset_token'),
             'password' =>  $newPassword,
@@ -35,13 +35,13 @@ class ResetPasswordControllerTest extends TestCase
 
     public function test_validation(): void
     {
-        $this->postJson(route('user.reset-password'),[
+        $this->postJson(route('user.reset-password'), [
             'email' => null,
             'token' => null,
             'password' =>  null,
             'password_confirmation' =>  null,
         ])
             ->assertStatus(422)
-            ->assertJsonValidationErrors(['email','token','password'], 'errors');
+            ->assertJsonValidationErrors(['email', 'token', 'password'], 'errors');
     }
 }

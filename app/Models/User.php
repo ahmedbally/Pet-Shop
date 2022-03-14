@@ -110,7 +110,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function avatar() {
+    public function avatar()
+    {
         return $this->belongsTo(File::class, 'avatar');
     }
 }

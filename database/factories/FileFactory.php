@@ -15,6 +15,7 @@ class FileFactory extends Factory
     public function definition()
     {
         $name = Str::random(40).'.png';
+
         return [
             'name' => $name,
             'path' => '/storage/pet-shop'.$name,

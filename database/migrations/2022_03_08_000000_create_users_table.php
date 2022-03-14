@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignUuid('avatar')->nullable()->constrained('files','uuid');
+            $table->foreignUuid('avatar')->nullable()->constrained('files', 'uuid');
             $table->string('address');
             $table->string('phone_number');
             $table->boolean('is_marketing')->default(0);

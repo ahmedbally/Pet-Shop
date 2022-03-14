@@ -18,7 +18,7 @@ class UuidableTest extends TestCase
     protected $uuidable;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -30,7 +30,7 @@ class UuidableTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function tearDown(): void
     {

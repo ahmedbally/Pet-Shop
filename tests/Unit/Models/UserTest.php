@@ -20,7 +20,7 @@ class UserTest extends TestCase
     protected $user;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -31,7 +31,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function tearDown(): void
     {
@@ -68,7 +68,7 @@ class UserTest extends TestCase
 
     public function test_get_jwt_custom_claims(): void
     {
-        $this->assertEquals([],$this->user->getJWTCustomClaims());
+        $this->assertEquals([], $this->user->getJWTCustomClaims());
     }
 
     public function test_avatar(): void

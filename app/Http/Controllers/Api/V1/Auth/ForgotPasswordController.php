@@ -30,13 +30,13 @@ class ForgotPasswordController extends Controller
 
         $credentials = $request->validate(['email' => ['required']]);
 
-        $status = PasswordBroker::sendResetLink($credentials, function ($user, $token) use (&$newToken){
+        $status = PasswordBroker::sendResetLink($credentials, function ($user, $token) use (&$newToken) {
             $newToken = $token;
         });
 
-        if ($status === PasswordBroker::RESET_LINK_SENT){
+        if ($status === PasswordBroker::RESET_LINK_SENT) {
             return JsonResource::make([
-                'reset_token' => $newToken
+                'reset_token' => $newToken,
             ])->success()->response();
         }
 

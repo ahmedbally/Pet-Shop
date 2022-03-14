@@ -21,7 +21,7 @@ class HandlerTest extends TestCase
     public function test_render(): void
     {
         $request = new Request();
-        $request->headers->set('Accept','application/json');
+        $request->headers->set('Accept', 'application/json');
         $handler = new Handler($this->createMock(Container::class));
         $response = $handler->render(
             $request,

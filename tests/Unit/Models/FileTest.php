@@ -19,7 +19,7 @@ class FileTest extends TestCase
     protected $file;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -28,7 +28,7 @@ class FileTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function tearDown(): void
     {
@@ -55,33 +55,33 @@ class FileTest extends TestCase
     public function test_set_size_attribute(): void
     {
         $this->file->size = 1024;
-        $this->assertEquals("1.00 KB", $this->file->size);
+        $this->assertEquals('1.00 KB', $this->file->size);
 
         $this->file->size = 2048;
-        $this->assertEquals("2.00 KB", $this->file->size);
+        $this->assertEquals('2.00 KB', $this->file->size);
 
         $this->file->size = 1024 * 1024;
-        $this->assertEquals("1.00 MB", $this->file->size);
+        $this->assertEquals('1.00 MB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024;
-        $this->assertEquals("1.00 GB", $this->file->size);
+        $this->assertEquals('1.00 GB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024 * 25;
-        $this->assertEquals("25.00 GB", $this->file->size);
+        $this->assertEquals('25.00 GB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024 * 1024;
-        $this->assertEquals("1.00 TB", $this->file->size);
+        $this->assertEquals('1.00 TB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024 * 1024 * 1024;
-        $this->assertEquals("1.00 PB", $this->file->size);
+        $this->assertEquals('1.00 PB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024 * 1024 * 1024 * 1024;
-        $this->assertEquals("1.00 EB", $this->file->size);
+        $this->assertEquals('1.00 EB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024;
-        $this->assertEquals("1.00 ZB", $this->file->size);
+        $this->assertEquals('1.00 ZB', $this->file->size);
 
         $this->file->size = 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024;
-        $this->assertEquals("1.00 YB", $this->file->size);
+        $this->assertEquals('1.00 YB', $this->file->size);
     }
 }

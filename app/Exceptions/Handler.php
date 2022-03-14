@@ -39,7 +39,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-
         $this->reportable(function (Throwable $e) {
             //
         });
@@ -55,7 +54,7 @@ class Handler extends ExceptionHandler
                     : 'Server Error')
             );
 
-        if(config('app.debug')){
+        if (config('app.debug')) {
             $response->trace(collect($e->getTrace())->map(function ($trace) {
                 return Arr::except($trace, ['args']);
             })->all());
@@ -70,6 +69,7 @@ class Handler extends ExceptionHandler
             $response->status($e->status);
             $response->errors($e->errors());
         }
+
         return $response->response();
     }
 
@@ -82,7 +82,6 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-
         return $this->shouldReturnJson($request, $exception)
             ? JsonResource::make([])->error($exception->getMessage())->response()->setStatusCode(401)
             : redirect()->guest($exception->redirectTo() ?? route('login'));

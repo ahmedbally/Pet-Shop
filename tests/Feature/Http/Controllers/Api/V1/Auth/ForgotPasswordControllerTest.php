@@ -29,6 +29,6 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $this->postJson(route('user.forgot-password'))
             ->assertStatus(422)
-            ->assertJsonValidationErrors('email','errors');
+            ->assertJsonValidationErrors('email', 'errors');
     }
 }

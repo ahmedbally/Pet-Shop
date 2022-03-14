@@ -22,7 +22,7 @@ class JsonResourceTest extends TestCase
     protected $jsonResource;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -33,7 +33,7 @@ class JsonResourceTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function tearDown(): void
     {
@@ -57,8 +57,8 @@ class JsonResourceTest extends TestCase
             'success' => 1,
             'error' => null,
             'errors' => [],
-            'extra' => []
-        ],$this->jsonResource->with($request));
+            'extra' => [],
+        ], $this->jsonResource->with($request));
     }
 
     public function test_success(): void
@@ -69,8 +69,8 @@ class JsonResourceTest extends TestCase
             'success' => 1,
             'error' => null,
             'errors' => [],
-            'extra' => []
-        ],$this->jsonResource->success()->with($request));
+            'extra' => [],
+        ], $this->jsonResource->success()->with($request));
     }
 
     public function test_error(): void
@@ -81,8 +81,8 @@ class JsonResourceTest extends TestCase
             'success' => 0,
             'error' => 'test',
             'errors' => [],
-            'trace' => []
-        ],$this->jsonResource->error('test')->with($request));
+            'trace' => [],
+        ], $this->jsonResource->error('test')->with($request));
     }
 
     public function test_errors(): void
@@ -93,8 +93,8 @@ class JsonResourceTest extends TestCase
             'success' => 0,
             'error' => 'test',
             'errors' => ['error'],
-            'trace' => []
-        ],$this->jsonResource->error('test')->errors(['error'])->with($request));
+            'trace' => [],
+        ], $this->jsonResource->error('test')->errors(['error'])->with($request));
     }
 
     public function test_trace(): void
@@ -105,17 +105,17 @@ class JsonResourceTest extends TestCase
             'success' => 0,
             'error' => 'test',
             'errors' => [],
-            'trace' => ['trace']
-        ],$this->jsonResource->error('test')->trace(['trace'])->with($request));
+            'trace' => ['trace'],
+        ], $this->jsonResource->error('test')->trace(['trace'])->with($request));
     }
 
     public function test_status(): void
     {
-        $this->assertEquals(400,$this->jsonResource->status(400)->response()->getStatusCode());
+        $this->assertEquals(400, $this->jsonResource->status(400)->response()->getStatusCode());
     }
 
     public function test_headers(): void
     {
-        $this->assertArrayHasKey('x-test-header',$this->jsonResource->headers(['x-test-header' => 'test'])->response()->headers->all());
+        $this->assertArrayHasKey('x-test-header', $this->jsonResource->headers(['x-test-header' => 'test'])->response()->headers->all());
     }
 }

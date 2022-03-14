@@ -40,13 +40,14 @@ class LoginController extends Controller
                 'required',
                 'string',
                 'max:255',
-            ]
+            ],
         ]);
 
         if (! $token = Auth::attempt($credentials)) {
             throw new UnprocessableEntityHttpException('Failed to authenticate user');
         }
         event(new Login(Auth::user()));
+
         return JsonResource::make(['token' => $token])->success()->response();
     }
 }

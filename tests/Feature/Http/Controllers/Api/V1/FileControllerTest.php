@@ -19,7 +19,7 @@ class FileControllerTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -33,7 +33,7 @@ class FileControllerTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.png');
 
         $response = $this->postJson(route('file.upload'), [
-            'file' => $file
+            'file' => $file,
         ]);
 
         Storage::assertExists('pet-shop/'.$file->hashName());
@@ -46,7 +46,7 @@ class FileControllerTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.pdf');
 
         $response = $this->postJson(route('file.upload'), [
-            'file'=>null
+            'file'=>null,
         ]);
 
         Storage::assertMissing('pet-shop/'.$file->hashName());
@@ -54,7 +54,7 @@ class FileControllerTest extends TestCase
             ->assertJsonValidationErrors('file');
 
         $response = $this->postJson(route('file.upload'), [
-            'file'=>$file
+            'file'=>$file,
         ]);
 
         Storage::assertMissing('pet-shop/'.$file->hashName());
@@ -65,13 +65,13 @@ class FileControllerTest extends TestCase
     public function test_show(): void
     {
         $file = File::factory()->create();
-        $this->getJson(route('file.show',['file' => $file->uuid]))
+        $this->getJson(route('file.show', ['file' => $file->uuid]))
             ->assertStatus(200);
     }
 
     public function test_show_not_found(): void
     {
-        $this->getJson(route('file.show',['file' => 'test']))
+        $this->getJson(route('file.show', ['file' => 'test']))
             ->assertStatus(404);
     }
 }

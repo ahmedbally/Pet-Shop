@@ -21,7 +21,7 @@ class FileResourceTest extends TestCase
     protected $fileResource;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -30,7 +30,7 @@ class FileResourceTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function tearDown(): void
     {
@@ -42,7 +42,7 @@ class FileResourceTest extends TestCase
     public function test_to_array(): void
     {
         $request = Mockery::mock(Request::class);
-        $keys = ['uuid','name','path','size','created_at','updated_at'];
+        $keys = ['uuid', 'name', 'path', 'size', 'created_at', 'updated_at'];
         $resource = $this->fileResource->toArray($request);
         foreach ($keys as $key) {
             $this->assertArrayHasKey($key, $resource);

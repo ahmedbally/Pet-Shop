@@ -30,8 +30,8 @@ class ResetPasswordController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required'],
-            'token' => ['required','string'],
-            'password' => Password::min(8)->rules('confirmed')
+            'token' => ['required', 'string'],
+            'password' => Password::min(8)->rules('confirmed'),
         ]);
 
         $status = PasswordBroker::reset($credentials, function ($user, $password) {
@@ -40,8 +40,8 @@ class ResetPasswordController extends Controller
 
         if ($status === PasswordBroker::PASSWORD_RESET) {
             return JsonResource::make([
-                'message' => 'Password has been successfully updated'
-                ])->success()->response();
+                'message' => 'Password has been successfully updated',
+            ])->success()->response();
         }
 
         throw new UnprocessableEntityHttpException('Invalid or expired token');

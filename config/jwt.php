@@ -70,7 +70,7 @@ return [
         |
         */
 
-        'private' => env('JWT_PRIVATE_KEY','file://jwtRS256.key'),
+        'private' => env('JWT_PRIVATE_KEY', 'file://jwtRS256.key'),
 
         /*
         |--------------------------------------------------------------------------

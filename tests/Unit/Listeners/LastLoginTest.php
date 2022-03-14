@@ -22,7 +22,7 @@ class LastLoginTest extends TestCase
     protected $lastLogin;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function setUp(): void
     {
@@ -32,7 +32,7 @@ class LastLoginTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function tearDown(): void
     {

@@ -4,9 +4,9 @@ namespace Tests\Feature\Http\Controllers\Api\V1\Auth;
 
 use App\Events\Login;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 /**
@@ -24,7 +24,7 @@ class LoginControllerTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create([
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
         ]);
     }
 
@@ -34,9 +34,9 @@ class LoginControllerTest extends TestCase
 
         $this->postJson(route('user.login'), [
             'email' => $this->user->email,
-            'password' => '12345678'
+            'password' => '12345678',
         ])->assertStatus(200)
-            ->assertJsonStructure([ 'data'=> ['token'] ]);
+            ->assertJsonStructure(['data'=> ['token']]);
 
         Event::assertDispatched(Login::class);
     }
@@ -45,19 +45,19 @@ class LoginControllerTest extends TestCase
     {
         $this->postJson(route('user.login'), [
             'email' => 'test@test.com',
-            'password' => '12345678'
+            'password' => '12345678',
         ])->assertStatus(422)
-            ->assertJsonPath('error','Failed to authenticate user');
+            ->assertJsonPath('error', 'Failed to authenticate user');
 
         $this->postJson(route('user.login'), [
             'email' => 'test',
-            'password' => '12345678'
+            'password' => '12345678',
         ])->assertStatus(422)
             ->assertJsonValidationErrorFor('email');
 
         $this->postJson(route('user.login'), [
             'email' => 'test@test.com',
-            'password' => null
+            'password' => null,
         ])->assertStatus(422)
             ->assertJsonValidationErrorFor('password');
     }
