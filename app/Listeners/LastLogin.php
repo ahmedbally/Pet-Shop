@@ -26,6 +26,6 @@ class LastLogin
      */
     public function handle(Login $event)
     {
-        $event->user->update(['last_login_at' => now()]);
+        optional($event->user)->update(['last_login_at' => now()]);
     }
 }

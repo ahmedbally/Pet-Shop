@@ -6,6 +6,7 @@ use App\Http\Resources\JsonResource;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
@@ -84,7 +85,7 @@ class Handler extends ExceptionHandler
     {
         return $this->shouldReturnJson($request, $exception)
             ? JsonResource::make([])->error($exception->getMessage())->response()->setStatusCode(401)
-            : redirect()->guest($exception->redirectTo() ?? route('login'));
+            : Redirect::guest($exception->redirectTo() ?? route('login'));
     }
 
     /**

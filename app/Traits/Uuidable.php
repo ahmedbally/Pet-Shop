@@ -6,6 +6,9 @@ use Illuminate\Support\Str;
 
 trait Uuidable
 {
+    /**
+     * @var string
+     */
     public $uuidColumn = 'uuid';
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\FileResource;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 class FileController extends Controller
@@ -21,12 +22,15 @@ class FileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'file' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
+        /**
+         * @var UploadedFile $file
+         */
         $file = $request->file('file');
 
         $path = $file->storePublicly('pet-shop');
@@ -45,7 +49,7 @@ class FileController extends Controller
      * @param File $file
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(File $file)
+    public function show(File $file): \Illuminate\Http\JsonResponse
     {
         return FileResource::make($file)->response();
     }

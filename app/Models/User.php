@@ -105,11 +105,21 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array<string,string>
+     */
     public function getJWTCustomClaims()
     {
         return [];
     }
 
+    /**
+     * Relation to file as avatar
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function avatar()
     {
         return $this->belongsTo(File::class, 'avatar');
