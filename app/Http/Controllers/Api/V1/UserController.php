@@ -3,62 +3,69 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\JsonResource;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @var User|\Illuminate\Contracts\Auth\Authenticatable|null
      */
-    public function index()
+    private $user;
+
+    public function __construct()
     {
-        //
+        $this->user = Auth::user();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $user = User::create($request->safe()->all());
+        return UserResource::make($user)->response();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return UserResource::make($this->user)->response();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request)
     {
-        //
+        $this->user->update($request->safe()->all());
+        return UserResource::make($this->user)->response();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        if (!$this->user->delete())
+            return JsonResource::make([])->error('Unable to delete')->status(403)->response();
+        return JsonResource::make([])->success()->status(202)->response();
     }
 }

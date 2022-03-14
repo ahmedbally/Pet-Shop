@@ -18,6 +18,10 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('logout', \App\Http\Controllers\Api\V1\Auth\LogoutController::class)->name('logout');
     Route::post('forgot-password', \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController::class)->name('forgot-password');
     Route::post('reset-password-token', \App\Http\Controllers\Api\V1\Auth\ResetPasswordController::class)->name('reset-password');
+    Route::get('',[\App\Http\Controllers\Api\V1\UserController::class, 'show'])->name('show');
+    Route::post('create',[\App\Http\Controllers\Api\V1\UserController::class, 'store'])->name('create');
+    Route::put('edit',[\App\Http\Controllers\Api\V1\UserController::class, 'update'])->name('edit');
+    Route::delete('',[\App\Http\Controllers\Api\V1\UserController::class, 'destroy'])->name('delete');
 });
 
 Route::prefix('file')->name('file.')->group(function () {
