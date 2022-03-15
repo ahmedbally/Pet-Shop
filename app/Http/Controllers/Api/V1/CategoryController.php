@@ -8,23 +8,112 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\JsonResource;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\Get(
+     * path="/api/v1/categories",
+     * operationId="allCategories",
+     * tags={"Categories"},
+     * summary="List all Categories",
+     * description="List all Categories",
+     *      @OA\Parameter(
+     *           name="page",
+     *           in="query",
+     *           @OA\Schema(
+     *           type="integer"
+     *       )
+     *       ),
+     *      @OA\Parameter(
+     *           name="limit",
+     *           in="query",
+     *           @OA\Schema(
+     *           type="integer"
+     *       )
+     *       ),
+     *      @OA\Parameter(
+     *           name="sortBy",
+     *           in="query",
+     *           @OA\Schema(
+     *           type="string"
+     *       )
+     *       ),
+     *      @OA\Parameter(
+     *           name="desc",
+     *           in="query",
+     *           @OA\Schema(
+     *           type="boolean"
+     *       )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Categories listed successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::query()->paginate();
+        $limit = $request->input('limit');
+        $sortBy = $request->input('sortBy');
+        $isDesc = $request->boolean('desc', false);
 
-        return CategoryResource::collection($categories)->success()->response();
+        return  Category::query()->sort($sortBy, $isDesc)->paginate($limit);
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     * path="/api/v1/category/create",
+     * operationId="CreateCateogry",
+     * security={{"bearer_token": {}}},
+     * tags={"Categories"},
+     * summary="Create Category",
+     * description="Create new Category",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application/x-www-form-urlencoded",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"title"},
+     *               @OA\Property(property="title", type="text"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Category created successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      *
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\JsonResponse
@@ -39,6 +128,33 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
+     * @OA\Get(
+     * path="/api/v1/category/{uuid}",
+     * operationId="singleCategory",
+     * tags={"Categories"},
+     * summary="Display fetched category",
+     * description="Display fetched category",
+     *      @OA\Parameter(
+     *           name="uuid",
+     *           in="path",
+     *           @OA\Schema(
+     *           type="string"
+     *       )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Display fetched category",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\JsonResponse
      */
@@ -49,6 +165,45 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @OA\Put(
+     * path="/api/v1/category/{uuid}",
+     * operationId="updateCategory",
+     * security={{"bearer_token": {}}},
+     * tags={"Categories"},
+     * summary="Update category with uuid",
+     * description="Update a Category",
+     *      @OA\Parameter(
+     *           name="uuid",
+     *           in="path",
+     *           @OA\Schema(
+     *           type="string"
+     *       )
+     *       ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application/x-www-form-urlencoded",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"title"},
+     *               @OA\Property(property="title", type="text"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Category updated successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      *
      * @param  \App\Http\Requests\UpdateCategoryRequest  $request
      * @param  \App\Models\Category  $category
@@ -64,6 +219,34 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @OA\Delete(
+     * path="/api/v1/category/{uuid}",
+     * operationId="deleteCategory",
+     * security={{"bearer_token": {}}},
+     * tags={"Categories"},
+     * summary="Delete specific category",
+     * description="Delete specific category",
+     *      @OA\Parameter(
+     *           name="uuid",
+     *           in="path",
+     *           @OA\Schema(
+     *           type="string"
+     *       )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Brand deleted successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\JsonResponse
      */
@@ -73,6 +256,6 @@ class CategoryController extends Controller
             return JsonResource::make([])->error('Unable to delete')->status(403)->response();
         }
 
-        return JsonResource::make([])->success()->status(202)->response();
+        return JsonResource::make([])->success()->status(200)->response();
     }
 }

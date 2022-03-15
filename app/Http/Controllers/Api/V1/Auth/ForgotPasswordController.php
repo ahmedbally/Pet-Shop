@@ -21,6 +21,37 @@ class ForgotPasswordController extends Controller
     /**
      * Handle the incoming request.
      *
+     * @OA\Post(
+     * path="/api/v1/user/forget-password",
+     * operationId="forgotPassword",
+     * tags={"User"},
+     * summary="Create token for resetting  Password",
+     * description="Request password reset token",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application/x-www-form-urlencoded",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"email"},
+     *               @OA\Property(property="email", type="text"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Password reset requested successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */

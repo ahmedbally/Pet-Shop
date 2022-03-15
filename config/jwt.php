@@ -57,7 +57,7 @@ return [
         |
         */
 
-        'public' => env('JWT_PUBLIC_KEY', 'file://jwtRS256.key.pub'),
+        'public' => env('JWT_PUBLIC_KEY', 'file://'.base_path('jwtRS256.key.pub')),
 
         /*
         |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ return [
         |
         */
 
-        'private' => env('JWT_PRIVATE_KEY', 'file://jwtRS256.key'),
+        'private' => env('JWT_PRIVATE_KEY', 'file://'.base_path('jwtRS256.key')),
 
         /*
         |--------------------------------------------------------------------------

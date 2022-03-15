@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Sortable;
 use App\Traits\Uuidable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,7 +46,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Product extends Model
 {
-    use HasFactory, Uuidable, SoftDeletes;
+    use HasFactory, Uuidable, SoftDeletes, Sortable;
 
     /**
      * @var string[]
@@ -54,6 +55,10 @@ class Product extends Model
         'title',
         'price',
         'description',
+    ];
+
+    protected $hidden = [
+        'id',
     ];
 
     /**

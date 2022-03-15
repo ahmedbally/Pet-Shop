@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Traits;
 
+use App\Models\User;
 use App\Traits\Uuidable;
 use Tests\TestCase;
 
@@ -52,5 +53,11 @@ class UuidableTest extends TestCase
     public function test_get_key_type(): void
     {
         $this->assertEquals('string', $this->uuidable->getKeyType());
+    }
+
+    public function test_create(): void
+    {
+        $user = User::factory()->create();
+        $this->assertNotNull($user->uuid);
     }
 }

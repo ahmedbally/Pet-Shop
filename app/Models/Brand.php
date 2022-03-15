@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Sortable;
 use App\Traits\Uuidable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,10 +33,14 @@ use Spatie\Sluggable\SlugOptions;
  */
 class Brand extends Model
 {
-    use HasFactory, HasSlug, Uuidable;
+    use HasFactory, HasSlug, Uuidable, Sortable;
 
     protected $fillable = [
         'title',
+    ];
+
+    protected $hidden = [
+        'id',
     ];
 
     /**

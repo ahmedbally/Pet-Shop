@@ -72,6 +72,6 @@ class FileControllerTest extends TestCase
     public function test_show_not_found(): void
     {
         $this->getJson(route('file.show', ['file' => 'test']))
-            ->assertStatus(200);
+            ->assertStatus(404);
     }
 }

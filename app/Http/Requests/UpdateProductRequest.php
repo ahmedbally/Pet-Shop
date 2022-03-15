@@ -32,13 +32,13 @@ class UpdateProductRequest extends FormRequest
             ],
             'price' => [
                 'required',
-                'decimal',
+                'numeric',
             ],
             'description' => [
                 'required',
                 'string',
             ],
-            'category' => [
+            'category_uuid' => [
                 'required',
                 Rule::exists('categories', 'uuid'),
             ],

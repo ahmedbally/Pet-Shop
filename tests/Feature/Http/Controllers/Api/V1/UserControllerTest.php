@@ -67,6 +67,6 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)->deleteJson(route('user.delete'))
-            ->assertStatus(202);
+            ->assertStatus(200);
     }
 }

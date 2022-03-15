@@ -23,6 +23,38 @@ class LoginController extends Controller
     /**
      * Handle the incoming request.
      *
+     * @OA\Post(
+     * path="/api/v1/user/login",
+     * operationId="Login",
+     * tags={"User"},
+     * summary="User Login",
+     * description="User Login here",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application/x-www-form-urlencoded",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"email", "password"},
+     *               @OA\Property(property="email", type="password"),
+     *               @OA\Property(property="password", type="password"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Login Successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws AuthorizationException
