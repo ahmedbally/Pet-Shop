@@ -52,7 +52,7 @@ Run database migrations and seeds:
 php artisan migrate --seed
 ```
 
-Generate secret asymmetric keys for JWT:
+Generate secret asymmetric keys for JWT (they already exists):
 
 ```bash
 ssh-keygen -t rsa -P "" -b 4096 -m PEM -f jwtRS256.key
