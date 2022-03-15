@@ -27,6 +27,13 @@ Follow the steps below to install the app quickly on your local machine.
 
 Download Composer [here](https://getcomposer.org/download).
 
+Credentials for authentication after migration
+
+```
+email : test@test.com
+password : password
+```
+
 Install dependencies:
 
 ```bash
