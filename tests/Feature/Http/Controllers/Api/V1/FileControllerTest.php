@@ -35,7 +35,6 @@ class FileControllerTest extends TestCase
         $response = $this->postJson(route('file.upload'), [
             'file' => $file,
         ]);
-
         Storage::assertExists('pet-shop/'.$file->hashName());
         $response->assertStatus(201);
     }
@@ -65,6 +64,7 @@ class FileControllerTest extends TestCase
     public function test_show(): void
     {
         $file = File::factory()->create();
+        $path = UploadedFile::fake()->image('avatar.png')->storeAs('pet-shop', basename($file->path));
         $this->getJson(route('file.show', ['file' => $file->uuid]))
             ->assertStatus(200);
     }
@@ -72,6 +72,6 @@ class FileControllerTest extends TestCase
     public function test_show_not_found(): void
     {
         $this->getJson(route('file.show', ['file' => 'test']))
-            ->assertStatus(404);
+            ->assertStatus(200);
     }
 }

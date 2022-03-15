@@ -7,7 +7,9 @@ use App\Http\Resources\FileResource;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FileController extends Controller
 {
@@ -33,7 +35,7 @@ class FileController extends Controller
          */
         $file = $request->file('file');
 
-        $path = $file->storePublicly('pet-shop');
+        $path = $file->store('pet-shop');
 
         return FileResource::make(File::create([
             'name' => Str::random(16),
@@ -47,10 +49,12 @@ class FileController extends Controller
      * Display the specified resource.
      *
      * @param File $file
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function show(File $file): \Illuminate\Http\JsonResponse
+    public function show(File $file): \Symfony\Component\HttpFoundation\StreamedResponse
     {
-        return FileResource::make($file)->response();
+        if (!Storage::exists($file->path))
+            throw new NotFoundHttpException('File not found');
+        return Storage::download($file->path, basename($file->path));
     }
 }

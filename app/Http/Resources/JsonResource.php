@@ -82,7 +82,7 @@ class JsonResource extends BaseResource
      *
      * @return $this
      */
-    public function success(): JsonResource
+    public function success(): self
     {
         $this->success = 1;
 
@@ -95,7 +95,7 @@ class JsonResource extends BaseResource
      * @param string $error
      * @return $this
      */
-    public function error(string $error = ''): JsonResource
+    public function error(string $error = ''): self
     {
         $this->success = 0;
         $this->status = 500;
@@ -110,7 +110,7 @@ class JsonResource extends BaseResource
      * @param array<string,string|array<string>> $errors
      * @return $this
      */
-    public function errors(array $errors = []): JsonResource
+    public function errors(array $errors = []): self
     {
         $this->errors = $errors;
 
@@ -123,7 +123,7 @@ class JsonResource extends BaseResource
      * @param array<string,string> $trace
      * @return $this
      */
-    public function trace(array $trace = []): JsonResource
+    public function trace(array $trace = []): self
     {
         $this->trace = $trace;
 
@@ -136,7 +136,7 @@ class JsonResource extends BaseResource
      * @param int $value
      * @return $this
      */
-    public function status(int $value): JsonResource
+    public function status(int $value): self
     {
         $this->status = $value;
 
@@ -149,7 +149,7 @@ class JsonResource extends BaseResource
      * @param array<string,string> $headers
      * @return $this
      */
-    public function headers(array $headers): JsonResource
+    public function headers(array $headers): self
     {
         $this->headers = $headers;
 

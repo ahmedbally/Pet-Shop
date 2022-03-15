@@ -18,7 +18,7 @@ class FileFactory extends Factory
 
         return [
             'name' => $name,
-            'path' => '/storage/pet-shop'.$name,
+            'path' => 'pet-shop/'.$name,
             'size' => $this->faker->numberBetween(2000),
             'type' => 'png',
         ];

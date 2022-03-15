@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers\Api\V1;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Models\File;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -15,7 +16,8 @@ use Tests\TestCase;
  */
 class UserControllerTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, DatabaseTransactions;
+
     public function test_store(): void
     {
         $password = $this->faker->password(8);

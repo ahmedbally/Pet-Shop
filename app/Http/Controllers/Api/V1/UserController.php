@@ -8,8 +8,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\JsonResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -32,6 +32,7 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $user = User::create($request->safe()->all());
+
         return UserResource::make($user)->response();
     }
 
@@ -54,6 +55,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request)
     {
         $this->user->update($request->safe()->all());
+
         return UserResource::make($this->user)->response();
     }
 
@@ -64,8 +66,10 @@ class UserController extends Controller
      */
     public function destroy()
     {
-        if (!$this->user->delete())
+        if (! $this->user->delete()) {
             return JsonResource::make([])->error('Unable to delete')->status(403)->response();
+        }
+
         return JsonResource::make([])->success()->status(202)->response();
     }
 }

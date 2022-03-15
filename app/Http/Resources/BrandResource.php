@@ -2,25 +2,15 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Support\Facades\Storage;
-
 /**
  * @property string $uuid
- * @property string $name
- * @property string $path
- * @property string $size
- * @property string $type
+ * @property string $title
+ * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  */
-class FileResource extends JsonResource
+class BrandResource extends JsonResource
 {
-    public function __construct($resource)
-    {
-        parent::__construct($resource);
-        $this->success();
-    }
-
     /**
      * Transform the resource into an array.
      *
@@ -32,9 +22,8 @@ class FileResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'name' => $this->name,
-            'path' => $this->path,
-            'size' => $this->size,
+            'title' => $this->title,
+            'slug' => $this->slug,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

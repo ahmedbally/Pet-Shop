@@ -13,18 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('user')->name('user.')->group(function () {
-    Route::post('login', \App\Http\Controllers\Api\V1\Auth\LoginController::class)->name('login');
-    Route::get('logout', \App\Http\Controllers\Api\V1\Auth\LogoutController::class)->name('logout');
-    Route::post('forgot-password', \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController::class)->name('forgot-password');
-    Route::post('reset-password-token', \App\Http\Controllers\Api\V1\Auth\ResetPasswordController::class)->name('reset-password');
-    Route::get('',[\App\Http\Controllers\Api\V1\UserController::class, 'show'])->name('show');
-    Route::post('create',[\App\Http\Controllers\Api\V1\UserController::class, 'store'])->name('create');
-    Route::put('edit',[\App\Http\Controllers\Api\V1\UserController::class, 'update'])->name('edit');
-    Route::delete('',[\App\Http\Controllers\Api\V1\UserController::class, 'destroy'])->name('delete');
-});
+Route::prefix('user')
+    ->name('user.')
+    ->group(function () {
+        Route::post('login', \App\Http\Controllers\Api\V1\Auth\LoginController::class)->name('login');
+        Route::get('logout', \App\Http\Controllers\Api\V1\Auth\LogoutController::class)->name('logout');
+        Route::post('forgot-password', \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController::class)->name('forgot-password');
+        Route::post('reset-password-token', \App\Http\Controllers\Api\V1\Auth\ResetPasswordController::class)->name('reset-password');
+        Route::controller(\App\Http\Controllers\Api\V1\UserController::class)
+            ->group(function (){
+                Route::get('',  'show')->name('show');
+                Route::post('create', 'store')->name('create');
+                Route::put('edit', 'update')->name('edit');
+                Route::delete('',  'destroy')->name('delete');
+            });
+    });
 
-Route::prefix('file')->name('file.')->group(function () {
-    Route::post('file/upload', [\App\Http\Controllers\Api\V1\FileController::class, 'store'])->name('upload');
-    Route::get('{file}', [\App\Http\Controllers\Api\V1\FileController::class, 'show'])->name('show');
-});
+Route::controller(\App\Http\Controllers\Api\V1\FileController::class)
+    ->prefix('file')
+    ->name('file.')
+    ->group(function (){
+        Route::post('upload', 'store')->name('upload');
+        Route::get('{file}' ,'show')->name('show');
+    });
+
+Route::controller(\App\Http\Controllers\Api\V1\BrandController::class)
+    ->prefix('brands')
+    ->name('brands.')
+    ->group(function (){
+        Route::get('','index')->name('index');
+        Route::post('create','store')->name('index');
+        Route::get('{brand}','show')->name('show');
+        Route::put('{brand}','update')->name('edit');
+        Route::delete('{brand}','update')->name('delete');
+    });

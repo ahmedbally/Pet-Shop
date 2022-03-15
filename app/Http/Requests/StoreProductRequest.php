@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 
-class CreateUserRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,36 +25,30 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => [
+            'title' => [
                 'required',
                 'string',
                 'max:255',
             ],
-            'last_name'=> [
+            'price' => [
+                'required',
+                'decimal',
+            ],
+            'description' => [
                 'required',
                 'string',
-                'max:255',
             ],
-            'email' => [
+            'category' => [
                 'required',
-                'email',
-                'max:255',
-                Rule::unique('users'),
+                Rule::exists('categories', 'uuid'),
             ],
-            'password' => Password::min(8)->rules('confirmed'),
-            'avatar' => [
-                'nullable',
+            'brand' => [
+                'required',
+                Rule::exists('brands', 'uuid'),
+            ],
+            'image' => [
+                'required',
                 Rule::exists('files', 'uuid'),
-            ],
-            'address' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-            'phone_number' => 'phone:AUTO,US',
-            'is_marketing' => [
-                'required',
-                'boolean',
             ],
         ];
     }

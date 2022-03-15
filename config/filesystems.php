@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'public'),
+    'default' => env('FILESYSTEM_DRIVER', 'pet_shop'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +40,11 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ],
+
+        'pet_shop' => [
+            'driver' => 'local',
+            'root'   => storage_path(),
         ],
 
         's3' => [

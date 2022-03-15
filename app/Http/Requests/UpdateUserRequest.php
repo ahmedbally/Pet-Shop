@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -30,33 +30,33 @@ class UpdateUserRequest extends FormRequest
             'first_name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'last_name'=> [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'email' => [
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore(Auth::user()->id)
+                Rule::unique('users')->ignore(Auth::user()->id),
             ],
             'password' => Password::min(8)->rules('confirmed'),
             'avatar' => [
                 'nullable',
-                Rule::exists('files', 'uuid')
+                Rule::exists('files', 'uuid'),
             ],
             'address' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'phone_number' => 'phone:AUTO,US',
             'is_marketing' => [
                 'required',
-                'boolean'
+                'boolean',
             ],
         ];
     }
