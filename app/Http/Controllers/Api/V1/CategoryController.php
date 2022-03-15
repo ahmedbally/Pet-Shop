@@ -10,6 +10,7 @@ use App\Http\Resources\JsonResource;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\ValidatedInput;
 
 class CategoryController extends Controller
 {
@@ -57,13 +58,11 @@ class CategoryController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Categories listed successfully",
-     *          @OA\JsonContent()
+     *          description="Categories listed successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -77,7 +76,7 @@ class CategoryController extends Controller
         $sortBy = $request->input('sortBy');
         $isDesc = $request->boolean('desc', false);
 
-        return  Category::query()->sort($sortBy, $isDesc)->paginate($limit);
+        return  Category::sort($sortBy, $isDesc)->paginate($limit);
     }
 
     /**
@@ -103,13 +102,11 @@ class CategoryController extends Controller
      *    ),
      *      @OA\Response(
      *          response=201,
-     *          description="Category created successfully",
-     *          @OA\JsonContent()
+     *          description="Category created successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -120,7 +117,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category = Category::create($request->safe()->all());
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $category = Category::create($safeRequest->all());
 
         return CategoryResource::make($category)->success()->response();
     }
@@ -143,13 +144,11 @@ class CategoryController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Display fetched category",
-     *          @OA\JsonContent()
+     *          description="Display fetched category"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -193,13 +192,11 @@ class CategoryController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="Category updated successfully",
-     *          @OA\JsonContent()
+     *          description="Category updated successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -211,7 +208,11 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category->update($request->safe()->all());
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $category->update($safeRequest->all());
 
         return CategoryResource::make($category)->success()->response();
     }
@@ -235,13 +236,11 @@ class CategoryController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Brand deleted successfully",
-     *          @OA\JsonContent()
+     *          description="Brand deleted successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

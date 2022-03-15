@@ -10,6 +10,7 @@ use App\Http\Resources\JsonResource;
 use App\Models\Brand;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\ValidatedInput;
 
 class BrandController extends Controller
 {
@@ -57,13 +58,11 @@ class BrandController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="User logout",
-     *          @OA\JsonContent()
+     *          description="User logout"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -77,7 +76,7 @@ class BrandController extends Controller
         $sortBy = $request->input('sortBy');
         $isDesc = $request->boolean('desc', false);
 
-        return Brand::query()->sort($sortBy, $isDesc)->paginate($limit);
+        return Brand::sort($sortBy, $isDesc)->paginate($limit);
     }
 
     /**
@@ -103,13 +102,11 @@ class BrandController extends Controller
      *    ),
      *      @OA\Response(
      *          response=201,
-     *          description="Category created successfully",
-     *          @OA\JsonContent()
+     *          description="Category created successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -120,7 +117,11 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        $brand = Brand::create($request->safe()->all());
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $brand = Brand::create($safeRequest->all());
 
         return BrandResource::make($brand)->success()->response();
     }
@@ -143,13 +144,11 @@ class BrandController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Display fetched brand",
-     *          @OA\JsonContent()
+     *          description="Display fetched brand"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -193,13 +192,11 @@ class BrandController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="Brand updated successfully",
-     *          @OA\JsonContent()
+     *          description="Brand updated successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -211,7 +208,11 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        $brand->update($request->safe()->all());
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $brand->update($safeRequest->all());
 
         return BrandResource::make($brand)->success()->response();
     }
@@ -235,13 +236,11 @@ class BrandController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Brand deleted successfully",
-     *          @OA\JsonContent()
+     *          description="Brand deleted successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

@@ -43,13 +43,11 @@ class LoginController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="Login Successfully",
-     *          @OA\JsonContent()
+     *          description="Login Successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

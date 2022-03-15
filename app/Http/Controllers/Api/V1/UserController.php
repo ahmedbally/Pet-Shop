@@ -10,6 +10,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\ValidatedInput;
 
 class UserController extends Controller
 {
@@ -53,13 +54,11 @@ class UserController extends Controller
      *    ),
      *      @OA\Response(
      *          response=201,
-     *          description="Registration Successful",
-     *          @OA\JsonContent()
+     *          description="Registration Successful"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -70,7 +69,11 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $user = User::create($request->safe()->all());
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $user = User::create($safeRequest->all());
 
         return UserResource::make($user)->success()->response();
     }
@@ -87,13 +90,11 @@ class UserController extends Controller
      * description="View user profile single",
      *      @OA\Response(
      *          response=200,
-     *          description="User profile displayed successfully",
-     *          @OA\JsonContent()
+     *          description="User profile displayed successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -137,13 +138,11 @@ class UserController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="Profile Updated Successfully",
-     *          @OA\JsonContent()
+     *          description="Profile Updated Successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -154,7 +153,11 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $this->user->update($request->safe()->all());
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        optional($this->user)->update($safeRequest->all());
 
         return UserResource::make($this->user)->success()->response();
     }
@@ -171,13 +174,11 @@ class UserController extends Controller
      * description="User delete account",
      *      @OA\Response(
      *          response=200,
-     *          description="User deleted successfully.",
-     *          @OA\JsonContent()
+     *          description="User deleted successfully."
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -187,7 +188,7 @@ class UserController extends Controller
      */
     public function destroy()
     {
-        if (! $this->user->delete()) {
+        if (! optional($this->user)->delete()) {
             return JsonResource::make([])->error('Unable to delete')->status(403)->response();
         }
 

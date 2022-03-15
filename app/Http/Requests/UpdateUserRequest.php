@@ -22,7 +22,7 @@ class UpdateUserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return  array<string, array<int,\Illuminate\Validation\Rules\Exists|\Illuminate\Validation\Rules\Unique|string>|\Illuminate\Validation\Rules\Password|string>>
      */
     public function rules()
     {
@@ -41,7 +41,7 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore(Auth::user()->id),
+                Rule::unique('users')->ignore(optional(Auth::user())->uuid),
             ],
             'password' => Password::min(8)->rules('confirmed'),
             'avatar' => [

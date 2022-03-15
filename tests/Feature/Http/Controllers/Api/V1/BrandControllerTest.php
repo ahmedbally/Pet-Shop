@@ -35,13 +35,13 @@ class BrandControllerTest extends TestCase
             'title' => 'test brand',
         ])
             ->assertStatus(201)
-            ->assertJsonPath('data.title', 'test brand') ;
+            ->assertJsonPath('data.title', 'test brand');
     }
 
     public function test_show(): void
     {
         $brand = Brand::factory()->create();
-        $this->getJson(route('brand.show',$brand->uuid))
+        $this->getJson(route('brand.show', $brand->uuid))
             ->assertStatus(200)
             ->assertJsonPath('data.uuid', $brand->uuid);
     }

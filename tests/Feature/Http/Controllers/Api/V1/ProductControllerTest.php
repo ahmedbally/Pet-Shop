@@ -3,11 +3,11 @@
 namespace Tests\Feature\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Middleware\Authenticate;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\File;
 use App\Models\Product;
-use App\Http\Middleware\Authenticate;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -47,13 +47,13 @@ class ProductControllerTest extends TestCase
             'category_uuid' => $category->uuid,
         ])
             ->assertStatus(201)
-            ->assertJsonPath('data.title', 'test product') ;
+            ->assertJsonPath('data.title', 'test product');
     }
 
     public function test_show(): void
     {
         $product = Product::factory()->create();
-        $this->getJson(route('product.show',$product->uuid))
+        $this->getJson(route('product.show', $product->uuid))
             ->assertStatus(200)
             ->assertJsonPath('data.uuid', $product->uuid);
     }

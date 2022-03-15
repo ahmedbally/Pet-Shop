@@ -10,6 +10,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\ValidatedInput;
 
 class ProductController extends Controller
 {
@@ -57,13 +58,11 @@ class ProductController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Products listed successfully",
-     *          @OA\JsonContent()
+     *          description="Products listed successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -76,7 +75,7 @@ class ProductController extends Controller
         $sortBy = $request->input('sortBy');
         $isDesc = $request->boolean('desc', false);
 
-        return Product::query()->sort($sortBy, $isDesc)->paginate($limit);
+        return Product::sort($sortBy, $isDesc)->paginate($limit);
     }
 
     /**
@@ -107,13 +106,11 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=201,
-     *          description="Product created successfully",
-     *          @OA\JsonContent()
+     *          description="Product created successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -124,7 +121,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = new Product($request->safe()->except(['category_uuid', 'brand', 'image']));
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $product = new Product($safeRequest->except(['category_uuid', 'brand', 'image']));
         $product->category()->associate($request->input('category_uuid'));
         $product->brand()->associate($request->input('brand'));
         $product->image()->associate($request->input('image'));
@@ -151,13 +152,11 @@ class ProductController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Display fetched product",
-     *          @OA\JsonContent()
+     *          description="Display fetched product"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -206,13 +205,11 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="Product updated successfully",
-     *          @OA\JsonContent()
+     *          description="Product updated successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -224,7 +221,11 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->safe()->except('category_uuid', 'brand', 'image'));
+        /**
+         * @var ValidatedInput $safeRequest
+         */
+        $safeRequest = $request->safe();
+        $product->update($safeRequest->except('category_uuid', 'brand', 'image'));
         $product->category()->associate($request->input('category_uuid'));
         $product->brand()->associate($request->input('brand'));
         $product->image()->associate($request->input('image'));
@@ -252,13 +253,11 @@ class ProductController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="Product deleted successfully",
-     *          @OA\JsonContent()
+     *          description="Product deleted successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

@@ -34,13 +34,13 @@ class CategoryControllerTest extends TestCase
             'title' => 'test category',
         ])
             ->assertStatus(201)
-            ->assertJsonPath('data.title', 'test category') ;
+            ->assertJsonPath('data.title', 'test category');
     }
 
     public function test_show(): void
     {
         $category = Category::factory()->create();
-        $this->getJson(route('category.show',$category->uuid))
+        $this->getJson(route('category.show', $category->uuid))
             ->assertStatus(200)
             ->assertJsonPath('data.uuid', $category->uuid);
     }

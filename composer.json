@@ -27,7 +27,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "nunomaduro/larastan": "1.0",
-        "phpunit/phpunit": "^9.5.10",
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
@@ -56,6 +56,15 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "test": [
+            "vendor/bin/phpunit"
+        ],
+        "analyse": [
+            "vendor/bin/phpstan analyse app --level=8 --memory-limit=2G"
+        ],
+        "sail": [
+            "vendor/bin/sail up"
         ]
     },
     "extra": {

@@ -30,15 +30,22 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder|Brand whereUpdatedAt($value)
  * @method static Builder|Brand whereUuid($value)
  * @mixin Builder
+ * @method static Builder|Brand sort($column, $isDesc)
  */
 class Brand extends Model
 {
     use HasFactory, HasSlug, Uuidable, Sortable;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'title',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'id',
     ];

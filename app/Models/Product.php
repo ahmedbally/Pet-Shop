@@ -43,6 +43,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
  * @mixin Builder
+ * @method static Builder|Product sort($column, $isDesc)
  */
 class Product extends Model
 {
@@ -57,6 +58,9 @@ class Product extends Model
         'description',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'id',
     ];

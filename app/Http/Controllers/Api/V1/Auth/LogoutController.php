@@ -29,13 +29,11 @@ class LogoutController extends Controller
      * description="User Logout here",
      *      @OA\Response(
      *          response=200,
-     *          description="User logged out successfully.",
-     *          @OA\JsonContent()
+     *          description="User logged out successfully."
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

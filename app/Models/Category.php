@@ -30,15 +30,22 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder|Category whereUpdatedAt($value)
  * @method static Builder|Category whereUuid($value)
  * @mixin Builder
+ * @method static Builder|Category sort($column, $isDesc)
  */
 class Category extends Model
 {
     use HasFactory, HasSlug, Uuidable, Sortable;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'title',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'id',
     ];

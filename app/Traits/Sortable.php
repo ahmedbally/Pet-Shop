@@ -7,7 +7,13 @@ use Illuminate\Support\Facades\Schema;
 
 trait Sortable
 {
-    public function scopeSort(Builder $builder, $column, $isDesc)
+    /**
+     * @param Builder $builder
+     * @param string|null $column
+     * @param bool $isDesc
+     * @return void
+     */
+    public function scopeSort(Builder $builder, ?string $column, bool $isDesc)
     {
         $direction = $isDesc ? 'desc' : 'asc';
         if (! empty($column) && Schema::hasColumn($this->getTable(), $column)) {

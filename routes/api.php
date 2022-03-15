@@ -37,7 +37,7 @@ Route::controller(\App\Http\Controllers\Api\V1\FileController::class)
         Route::get('{file}', 'show')->name('show');
     });
 
-Route::get('brands',[\App\Http\Controllers\Api\V1\BrandController::class, 'index'])->name('brands');
+Route::get('brands', [\App\Http\Controllers\Api\V1\BrandController::class, 'index'])->name('brands');
 Route::controller(\App\Http\Controllers\Api\V1\BrandController::class)
     ->prefix('brand')
     ->name('brand.')
@@ -48,7 +48,7 @@ Route::controller(\App\Http\Controllers\Api\V1\BrandController::class)
         Route::delete('{brand}', 'destroy')->name('delete');
     });
 
-Route::get('categories',[\App\Http\Controllers\Api\V1\CategoryController::class, 'index'])->name('categories');
+Route::get('categories', [\App\Http\Controllers\Api\V1\CategoryController::class, 'index'])->name('categories');
 Route::controller(\App\Http\Controllers\Api\V1\CategoryController::class)
     ->prefix('category')
     ->name('category.')
@@ -59,7 +59,7 @@ Route::controller(\App\Http\Controllers\Api\V1\CategoryController::class)
         Route::delete('{category}', 'destroy')->name('delete');
     });
 
-Route::get('products',[\App\Http\Controllers\Api\V1\ProductController::class, 'index'])->name('products');
+Route::get('products', [\App\Http\Controllers\Api\V1\ProductController::class, 'index'])->name('products');
 Route::controller(\App\Http\Controllers\Api\V1\ProductController::class)
     ->prefix('product')
     ->name('product.')

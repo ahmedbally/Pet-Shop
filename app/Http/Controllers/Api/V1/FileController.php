@@ -41,13 +41,11 @@ class FileController extends Controller
      *    ),
      *      @OA\Response(
      *          response=201,
-     *          description="File uploaded Successfully",
-     *          @OA\JsonContent()
+     *          description="File uploaded Successfully"
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -95,13 +93,11 @@ class FileController extends Controller
      *       ),
      *      @OA\Response(
      *          response=200,
-     *          description="File downloaded successfully.",
-     *          @OA\JsonContent()
+     *          description="File downloaded successfully."
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          description="Unprocessable Entity"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
